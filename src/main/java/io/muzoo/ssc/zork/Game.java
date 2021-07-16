@@ -11,6 +11,7 @@ public class Game {
 
     private CommandParser commandParser = new CommandParser();
     public void run(){
+        System.out.println("WELCOME TO ZORK \ntype help for further information");
         while (true){
             Scanner in = new Scanner(System.in);
             String s = in.nextLine();
