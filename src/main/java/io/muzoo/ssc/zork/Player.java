@@ -1,93 +1,62 @@
 package io.muzoo.ssc.zork;
 
-import java.util.List;
+import io.muzoo.ssc.zork.item.AllItems;
+
 import java.util.ArrayList;
+import java.util.List;
+
 
 public class Player {
-
-    private int hp;
-
-    private int maxHp;
-
-    private String name;
-
-    private final List<Item> inventory;
-
-    private boolean dead =false;
+    private List<AllItems> inventory;
+    private final int MaxHP;
+    private int currentHp;
+    private int attackPower;
 
 
-
-
-
-    public Player(final int hp, final String name) {
-        this.hp = hp;
-        this.maxHp = hp;
-        this.name = name;
-        this.inventory = new ArrayList<>();
+    public Player(){
+        MaxHP = 100;
+        currentHp = 100;
+        attackPower = 5;
+        inventory = new ArrayList<>();
     }
 
-    public String currentDescription() {
-        final StringBuilder desc = new StringBuilder();
-        desc.append(this.name);
-        desc.append('\n');
-        desc.append(" You have ").append(this.hp).append("Hp");
-        desc.append('\n');
-        desc.append("Your max Hp is ").append(this.maxHp).append("Hp");
-        desc.append('\n');
-        return desc.toString();
+    public void getAttackedFromMonster(int damageFromMonster){
+        int damage_taken = damageFromMonster;
+        if (damage_taken >= 0){
+            currentHp -= damage_taken;
+        }
     }
 
-    public String getName() {
-        return this.name;
+    public void increaseHp(int HPhealing){
+        currentHp += HPhealing;
+        if (currentHp > MaxHP){
+            currentHp = MaxHP;
+        }
     }
 
-    public void rename(final String newName) {
-        this.name = newName;
+    public List<AllItems> getInventoryList(){ return inventory; }
+
+    public void addInventory(AllItems items){ inventory.add(items); }
+
+    public void removeInventory(AllItems item){ inventory.remove(item); }
+
+    public void increaseATK(int attackBuff){
+        attackPower += attackBuff;
     }
 
-    public void addItem(final Item item) {
-        this.inventory.add(item);
+    public int getMaxHp(){
+        return MaxHP;
     }
 
-    public void removeItem(final Item item) {
-        this.inventory.remove(item);
-    }
-
-    /**
-     * Return inventory of the player.
-     * @return - List of item.
-     */
-    public List<Item> getInventory() {
-        return this.inventory;
+    public int getCurrentHp(){
+        return currentHp;
     }
 
 
-    public void setHp( int n) {
-        this.hp = n;
+    public int getATK(){
+        return attackPower;
     }
 
-
-    public int getHp() {
-        return this.hp;
-    }
-
-
-    public void addHp( int n) {
-        this.hp += n;
-    }
-
-    public void setMaxHp( int n) {
-        this.maxHp = n;
-    }
-
-
-    public int getMaxHp() {
-        return this.maxHp;
-    }
-
-    public boolean setDead(String name){
-        return this.dead=true;
-    }
-
+    public void setDefaultATK(int defaultATK){ attackPower = defaultATK; }
 
 }
