@@ -20,7 +20,7 @@ public abstract class BuiltInMap {
 
     public void printStartRoom(){
         System.out.println("Welcome to the map" );
-        System.out.println("You are currently in a deserted campus");
+        System.out.println("You are currently in a deserted University campus");
         System.out.println("You can pick up items from rooms");
         System.out.println("");
         System.out.println("----------------------------------");
@@ -36,13 +36,13 @@ public abstract class BuiltInMap {
         System.out.println( "Good luck");
     }
 
-    public int setCurrent(int dirRoom){
-        Room nextCurrent = current.getRoomFromDirection(dirRoom);
+    public void setCurrent(String dirRoom){
+        Room nextCurrent = current.getExit(dirRoom);
         if (nextCurrent != null) {
             current = nextCurrent;
-            return 1;
+
         }
-        return 0;
+
     }
 
 
